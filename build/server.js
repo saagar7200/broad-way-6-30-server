@@ -54,7 +54,9 @@ const app = (0, express_1.default)();
 (0, database_config_1.connectDB)(DB_URI);
 // using middlewares
 app.use((0, helmet_1.default)());
-app.use((0, cors_1.default)());
+app.use((0, cors_1.default)({
+    origin: '*'
+}));
 app.use(express_1.default.urlencoded());
 app.use(express_1.default.json());
 app.use('/api/uploads', express_1.default.static('uploads/'));
