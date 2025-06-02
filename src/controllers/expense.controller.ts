@@ -233,7 +233,7 @@ export const remove = asyncHandler(async(req:Request,res:Response)=>{
         throw new CustomError('Expense not found',404)
     }
 
-    if(expense.user !== userId){
+    if(expense.user.toString() !== userId.toString()){
         throw new CustomError('You can not perform this operation',400)
     }
 

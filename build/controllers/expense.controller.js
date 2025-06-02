@@ -191,7 +191,7 @@ exports.remove = (0, async_handler_1.asyncHandler)((req, res) => __awaiter(void 
     if (!expense) {
         throw new error_handler_middleware_1.default('Expense not found', 404);
     }
-    if (expense.user !== userId) {
+    if (expense.user.toString() !== userId.toString()) {
         throw new error_handler_middleware_1.default('You can not perform this operation', 400);
     }
     yield expense.deleteOne();
