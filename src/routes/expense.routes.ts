@@ -10,7 +10,7 @@ const router = express.Router()
 router.post('/',Authenticate([Role.USER]),upload.array('receipts',3),create)
 router.put('/:id',Authenticate([Role.USER]),upload.array('receipts',3),update)
 router.get('/',Authenticate([Role.USER]),getAllByUser)
-router.get('/:id',getById)
+router.get('/:id',Authenticate([Role.USER]),getById)
 router.get('/category/:categoryId',getAllUserExpByCategory)
 router.delete('/:id',Authenticate([Role.USER]),remove)
 
