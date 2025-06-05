@@ -256,3 +256,20 @@ export const remove = asyncHandler(async(req:Request,res:Response)=>{
 })
 
 
+export const getById = asyncHandler(async(req:Request,res:Response)=>{
+    const {id} = req.params
+
+    const expense = await Expense.findById(id)
+    if(!expense){
+        throw new CustomError('Expense not found',404)
+    }
+
+   
+    res.status(200).json({
+        status:'success',
+        success:true,
+        message:'Expense by ID.',
+        data:expense
+    })
+
+})

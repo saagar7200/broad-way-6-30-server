@@ -23,7 +23,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.remove = exports.getAllUserExpByCategory = exports.getAllByUser = exports.update = exports.create = void 0;
+exports.getById = exports.remove = exports.getAllUserExpByCategory = exports.getAllByUser = exports.update = exports.create = void 0;
 const expense_model_1 = __importDefault(require("../models/expense.model"));
 const async_handler_1 = require("../utils/async-handler");
 const error_handler_middleware_1 = __importDefault(require("../middlewares/error-handler.middleware"));
@@ -204,5 +204,18 @@ exports.remove = (0, async_handler_1.asyncHandler)((req, res) => __awaiter(void 
         success: true,
         message: 'Expense deleted.',
         data: null
+    });
+}));
+exports.getById = (0, async_handler_1.asyncHandler)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const expense = yield expense_model_1.default.findById(id);
+    if (!expense) {
+        throw new error_handler_middleware_1.default('Expense not found', 404);
+    }
+    res.status(200).json({
+        status: 'success',
+        success: true,
+        message: 'Expense by ID.',
+        data: expense
     });
 }));
